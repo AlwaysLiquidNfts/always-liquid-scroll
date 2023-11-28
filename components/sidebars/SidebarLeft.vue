@@ -40,6 +40,7 @@
 
         <ul class="nav nav-pills flex-column">
 
+          <!-- Categories 
           <ul class="list-group">
             <NuxtLink 
               to="/"
@@ -54,23 +55,24 @@
           </ul>
 
           <hr />
-
-          <!-- Home 
-          <li class="nav-item p-1" @click="closeLeftSidebar">
-            <NuxtLink class="nav-link" :class="$route.path === '/' ? 'active' : ''" aria-current="page" to="/">
-              <i class="bi bi-house"></i> Home
-            </NuxtLink>
-          </li>
           -->
 
-          <!-- NFT Launchpad -->
+          <!-- Home -->
+          <li class="nav-item p-1" @click="closeLeftSidebar">
+            <NuxtLink class="nav-link" :class="$route.path === '/' ? 'active' : ''" aria-current="page" to="/">
+              <i class="bi bi-house"></i> NFT Launchpad
+            </NuxtLink>
+          </li>
+
+          <!-- NFT Launchpad 
           <li class="nav-item p-1" @click="closeLeftSidebar" v-if="$config.nftLaunchpadBondingAddress && $config.showFeatures.nftLaunchpad">
             <NuxtLink class="nav-link" :class="$route.path.startsWith('/nft') ? 'active' : ''" aria-current="page" to="/nft">
               <i class="bi bi-rocket-takeoff"></i> NFT Launchpad
             </NuxtLink>
           </li>
+          -->
 
-          <!-- Notifications -->
+          <!-- Notifications 
           <li v-if="isActivated" class="nav-item p-1" @click="closeLeftSidebar">
             <NuxtLink class="nav-link" :class="$route.path.startsWith('/notifications') ? 'active' : ''" aria-current="page" to="/notifications">
               <i class="bi bi-bell"></i> Notifications
@@ -83,6 +85,7 @@
 
             </NuxtLink>
           </li>
+          -->
 
           <!-- Profile -->
           <li v-if="isActivated" class="nav-item p-1" @click="closeLeftSidebar">
@@ -201,7 +204,7 @@
         </ul>
       </div>
       
-   </div>
+    </div>
   </div>
 </div>
 </template>

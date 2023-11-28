@@ -37,6 +37,8 @@ export default defineNuxtPlugin(() => {
       return "Arbitrum Goerli Testnet";
     } else if (chainId === 80001) {
       return "Polygon Testnet";
+    } else if (chainId === 534352) {
+      return "Scroll";
     } else if (chainId === 3) {
       return "Ropsten";
     } else if (chainId === 4) {
@@ -204,6 +206,16 @@ export default defineNuxtPlugin(() => {
         chainId: ethers.utils.hexValue(networkId),
         chainName: "Flare",
         nativeCurrency: { decimals: 18, name: "FLR", symbol: "FLR" }, 
+        rpcUrls: [getRpcs2()[networkId]]
+      }] 
+    } else if (networkName == "Scroll") {
+      networkId = 534352;
+      method = "wallet_addEthereumChain"
+      params = [{ 
+        blockExplorerUrls: [ "https://scrollscan.com/" ],
+        chainId: ethers.utils.hexValue(networkId),
+        chainName: "Scroll",
+        nativeCurrency: { decimals: 18, name: "ETH", symbol: "ETH" }, 
         rpcUrls: [getRpcs2()[networkId]]
       }] 
     }

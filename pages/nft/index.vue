@@ -1,15 +1,15 @@
 <template>
 <Head>
-  <Title>NFT Launchpad | {{ $config.projectMetadataTitle }}</Title>
-  <Meta property="og:title" :content="'NFT Launchpad | ' + $config.projectMetadataTitle" />
+  <Title>{{ $config.projectName }}</Title>
+  <Meta property="og:title" :content="$config.projectName" />
 
-  <Meta name="description" :content="'Check out these awesome NFT collections on ' + $config.projectName + '!'" />
+  <Meta name="description" content="Social NFT Marketplace where NFTs are always liquid." />
 
-  <Meta property="og:image" :content="$config.projectUrl+$config.previewImageNftLaunchpad" />
-  <Meta property="og:description" :content="'Check out these awesome NFT collections on ' + $config.projectName + '!'" />
+  <Meta property="og:image" :content="$config.projectUrl+$config.previewImage" />
+  <Meta property="og:description" content="Social NFT Marketplace where NFTs are always liquid." />
 
-  <Meta name="twitter:image" :content="$config.projectUrl+$config.previewImageNftLaunchpad" />
-  <Meta name="twitter:description" :content="'Check out these awesome NFT collections on ' + $config.projectName + '!'" />
+  <Meta name="twitter:image" :content="$config.projectUrl+$config.previewImage" />
+  <Meta name="twitter:description" content="Social NFT Marketplace where NFTs are always liquid." />
 </Head>
 
 <div class="card border scroll-500">
@@ -166,6 +166,7 @@ export default {
 
       // create launchpad contract object
       const launchpadInterface = new ethers.utils.Interface([
+        "function getLastNftContracts(uint256 amount) external view returns(address[] memory)",
         "function getNftContracts(uint256 fromIndex, uint256 toIndex) external view returns(address[] memory)",
         "function getNftContractsArrayLength() external view returns(uint256)"
       ]);
@@ -177,11 +178,14 @@ export default {
       );
 
       // get all NFTs array length
-      if (this.allNftsArrayLength === 0) {
+      if (Number(this.allNftsArrayLength) === 0) {
         this.allNftsArrayLength = await launchpadContract.getNftContractsArrayLength();
       }
 
-      if (this.allNftsArrayLength > 0) {
+      if (Number(this.allNftsArrayLength) === 1) {
+        const lNfts = await launchpadContract.getLastNftContracts(1);
+        await this.parseNftsArray(lNfts, this.lastNfts, provider);
+      } else if (Number(this.allNftsArrayLength) > 1) {
         // set the start and end index, if end index is 0
         if (this.allNftsIndexEnd === 0) {
           this.allNftsIndexEnd = this.allNftsArrayLength - 1;
