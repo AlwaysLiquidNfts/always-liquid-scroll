@@ -4,7 +4,7 @@
 
 :root {
   --bs-primary: #eb7106 !important; /* TODO: Replace is with your primary color */
-  --bs-primary-rgb: 142, 133, 230; /* TODO: This should be an RGB version of --bs-primary hex color */
+  --bs-primary-rgb: 234, 112, 6; /* TODO: This should be an RGB version of --bs-primary hex color */
   --bs-btn-disabled-border-color: #eb7106; /* TODO: Replace is with your primary color */
   --bs-link-color: #eb7106; /* TODO: Replace is with your primary color */
   --bs-nav-pills-link-active-bg: #eb7106 !important; /* TODO: Replace is with your primary color */
