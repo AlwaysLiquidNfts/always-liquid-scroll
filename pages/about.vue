@@ -33,14 +33,16 @@
 
       <p class="text-break mt-3">
         Brought to you by the 
-        <a target="_blank" href="https://punk.domains">Punk Domains</a> team.
+        <a target="_blank" href="https://punk.domains">Punk Domains</a> team, built with the 
+        <a target="_blank" href="https://iggy.social">Iggy web3 framework</a>.
       </p>
 
       <h5>Useful links</h5>
 
       <ul>
         <li><a href="https://github.com/AlwaysLiquidNfts" target="_blank">AlwaysLiquid GitHub</a></li>
-        <li><a href="https://github.com/punk-domains" target="_blank">Punk Domains GitHub</a></li>
+        <li><a href="https://github.com/punk-domains-2" target="_blank">Punk Domains GitHub</a></li>
+        <li><a href="https://github.com/iggy-social" target="_blank">Iggy GitHub</a></li>
         <li><a href="https://discord.gg/8dSrwrAQeu" target="_blank">Discord</a></li>
       </ul>
 

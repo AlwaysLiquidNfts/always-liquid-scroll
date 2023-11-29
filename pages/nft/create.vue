@@ -307,7 +307,8 @@ export default {
             // after successful launch, fetch the collection address and redirect to the collection page
             const nftContractAddress = await launchpadContract.getNftContractAddress(this.uniqueId);
 
-            this.makeOrbisPost(nftContractAddress);
+            // TODO: uncomment, if you have a general chat enabled
+            //this.makeOrbisPost(nftContractAddress);
 
             this.$router.push({ path: '/nft/collection', query: { id: nftContractAddress } });
 
