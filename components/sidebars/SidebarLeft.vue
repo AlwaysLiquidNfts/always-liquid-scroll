@@ -151,6 +151,21 @@
             </NuxtLink>
           </li>
           
+          <li class="nav-item p-1 dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+              <i class="bi bi-link-45deg"></i> Other chains
+            </a>
+
+            <ul class="dropdown-menu">
+
+              <li class="pt-1 pb-1" @click="closeLeftSidebar">
+                <a class="dropdown-item" href="https://arbi.alwaysliquid.com" target="_blank">
+                  Arbitrum <small><i class="bi bi-box-arrow-up-right ms-1"></i></small>
+                </a>
+              </li>
+
+            </ul>
+          </li>
 
           <!-- More 
           <li class="nav-item p-1 dropdown">
