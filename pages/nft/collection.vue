@@ -208,6 +208,7 @@ import ChangeCollectionPreviewModal from "~/components/nft/collection/ChangeColl
 import ChangeDescriptionModal from "~/components/nft/collection/ChangeDescriptionModal";
 import ChangeNftTypeModal from "~/components/nft/collection/ChangeNftTypeModal";
 import RemoveImageFromCollectionModal from "~/components/nft/collection/RemoveImageFromCollectionModal";
+import { getWorkingUrl } from '~/utils/ipfsUtils';
 import { getDomainName } from '~/utils/domainUtils';
 import { fetchCollection, fetchUsername, storeCollection, storeUsername } from '~/utils/storageUtils';
 import { getTextWithoutBlankCharacters } from '~/utils/textUtils';
@@ -419,7 +420,6 @@ export default {
       let collection = fetchCollection(window, this.cAddress);
 
       if (refresh) {
-        console.log("Refreshing collection metadata...");
         collection = null;
       }
 
@@ -468,12 +468,11 @@ export default {
         this.cImage = await metadataContract.getCollectionPreviewImage(this.cAddress);
       }
 
-      // check if collection image uses Spheron IPFS gateway (in that case replace it with the IPFS gateway defined in the config)
-      if (this.cImage.includes(".ipfs.sphn.link/")) {
-          const linkParts = this.cImage.split(".ipfs.sphn.link/");
-          const cid = linkParts[0].replace("https://", "");
-          this.cImage = this.$config.ipfsGateway + cid + "/" + linkParts[1];
-        }
+      const imgUrlRes = await getWorkingUrl(this.cImage);
+
+      if (imgUrlRes.success) {
+        this.cImage = imgUrlRes.url;
+      }
 
       // get description
       if (collection?.description && collection.description !== "" && collection.description !== null) {
@@ -536,7 +535,7 @@ export default {
       storeCollection(window, this.cAddress, collection);
     },
 
-    saveCollection(newCollectionData) {
+    async saveCollection(newCollectionData) {
 
       if (newCollectionData?.type) {
         this.cType = newCollectionData.type;
@@ -547,7 +546,13 @@ export default {
       }
       
       if (newCollectionData?.image) {
-        this.cImage = newCollectionData.image;
+        const newImgRes = await getWorkingUrl(newCollectionData.image);
+
+        if (newImgRes.success) {
+          this.cImage = newImgRes.url;
+        } else {
+          this.cImage = newCollectionData.image;
+        }
       }
 
       // create collection object, JSON.stringify it and save it to session storage
